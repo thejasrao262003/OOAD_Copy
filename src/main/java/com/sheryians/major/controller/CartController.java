@@ -36,9 +36,8 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public String checkout(Model model)
-    {
-        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+    public String checkout(Model model) {
+        // No need to add anything here as redirection will be handled by JavaScript
         return "checkout";
     }
 }

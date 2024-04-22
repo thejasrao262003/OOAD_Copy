@@ -83,8 +83,6 @@
                                             <div>
                                                 <h5 th:text="${item.name}">Blue denim shirt</h5>
                                                 <p class="mb-3 text-uppercase small">Weight: <span th:text="${item.weight}"></span> grams</p>
-<!--                                                <p class="mb-2 text-uppercase small">Category: <span th:text="${item.category.name}"></span></p>-->
-
                                             </div>
 
                                         </div>
@@ -107,9 +105,6 @@
                         </div>
                     </div>
 
-
-
-
                 </div>
                 <!--Grid column-->
 
@@ -120,7 +115,18 @@
                     <div class="card mb-4">
                         <div class="card-body">
 
-                            <h5 class="mb-3">The total amount </h5>
+                            <h5 class="mb-3">Select Payment Method</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="paymentMethodDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Select Payment Method
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="paymentMethodDropdown">
+                                    <a class="dropdown-item" href="#" id="payByUPI">UPI</a>
+                                    <a class="dropdown-item" href="#" id="payByDebitCard">Debit Card</a>
+                                </div>
+                            </div>
+
+                            <h5 class="mt-4 mb-3">The total amount </h5>
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
@@ -142,12 +148,11 @@
                                 </li>
                             </ul>
 
-                            <a th:href="@{/checkout}" h class="btn btn-primary btn-block waves-effect waves-light">go to
+                            <a href="#" class="btn btn-primary btn-block waves-effect waves-light" id="goToCheckoutBtn">go to
                                 checkout</a>
 
                         </div>
                     </div>
-                    <!-- Card -->
 
                     <!-- Card -->
                     <div class="card mb-4">
@@ -191,5 +196,28 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        // Event listener for dropdown change
+        $(".dropdown-item").click(function(){
+            var selectedOption = $(this).text().trim();
+            $(".dropdown-toggle").text(selectedOption); // Update dropdown button text
+        });
+
+        // Event listener for go to checkout button
+        $("#goToCheckoutBtn").click(function(){
+            var selectedOption = $(".dropdown-toggle").text().trim();
+            if(selectedOption === "Select Payment Method"){
+                alert("Please select a payment method");
+            } else {
+                if(selectedOption === "UPI"){
+                    window.location.href = "/paybyupi";
+                } else if(selectedOption === "Debit Card"){
+                    window.location.href = "/paybydebitcard";
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

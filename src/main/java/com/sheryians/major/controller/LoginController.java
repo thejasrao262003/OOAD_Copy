@@ -60,6 +60,4 @@ public class LoginController {
         request.login(user.getEmail(), password);
         return "redirect:/";
     }
-
-
 }
